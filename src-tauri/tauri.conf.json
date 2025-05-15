@@ -4,17 +4,17 @@
   "version": "0.1.0",
   "identifier": "com.balatro_predictor.app",
   "build": {
-    "beforeDevCommand": "npm dev",
+    "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm build",
-    "frontendDist": "../dist"
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "target/wwwroot"
   },
   "app": {
     "windows": [
       {
         "title": "Balatro Hand Predictor",
         "width": 800,
-        "height": 600,
+        "height": 620,
         "decorations": false,
         "resizable": false
       }
