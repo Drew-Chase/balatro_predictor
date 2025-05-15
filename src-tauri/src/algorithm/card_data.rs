@@ -2,7 +2,7 @@ use crate::algorithm::card_suits::CardSuit;
 use crate::algorithm::faces::CardFace;
 use serde::{Deserialize, Serialize};
 use std::fmt::{Debug, Formatter};
-#[derive(Serialize, Deserialize, Copy, Clone, Default)]
+#[derive(Serialize, Deserialize, Copy, Clone, Default, PartialEq, Eq)]
 pub struct CardData {
     pub card_suit: CardSuit,
     pub card_face: CardFace,

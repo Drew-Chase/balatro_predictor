@@ -1,14 +1,11 @@
 import {Select, SelectItem} from "@heroui/react";
-import {CardSuit, CardSuitSelector} from "./CardSuitSelector.tsx";
+import {CardSuitSelector} from "./CardSuitSelector.tsx";
+import {Card, CardFace} from "../ts/CardCommands.ts";
 
-type CardOption = {
-    card: number,
-    suit: CardSuit,
-}
 type CardOptionSelectorProps = {
     index: number,
-    value: CardOption,
-    onChange: (option: CardOption) => void,
+    value: Card,
+    onChange: (option: Card) => void,
 }
 
 export function CardOptionSelector(props: CardOptionSelectorProps)
@@ -17,8 +14,8 @@ export function CardOptionSelector(props: CardOptionSelectorProps)
         <div className={"flex flex-row gap-2 items-center"}>
             <p className={"min-w-[70px] grow"}>Card: {props.index}</p>
             <CardSuitSelector value={props.value.suit} onChange={suit => props.onChange({...props.value, suit})}/>
-            <Select label={"Number"} selectedKeys={[props.value.card.toString()]} onSelectionChange={keys => props.onChange({...props.value, card: parseInt([...keys][0] as string)})}>
-                {Array.from({length: 13}, (_, i) => i + 1).map(i => <SelectItem key={i.toString()} textValue={i.toString()}>{i}</SelectItem>)}
+            <Select label={"Number"} selectedKeys={[props.value.card_face.toString()]} onSelectionChange={keys => props.onChange({...props.value, card_face: CardFace[keys[0] as string] as CardFace})}>
+                {Object.values(CardFace).map(face => <SelectItem key={face} textValue={face}>{face}</SelectItem>)}
             </Select>
         </div>
     );
