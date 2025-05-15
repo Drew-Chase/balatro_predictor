@@ -1,2 +1,0 @@
-# balatro_predictor
-
