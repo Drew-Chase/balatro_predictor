@@ -5,10 +5,9 @@ import $ from "jquery";
 
 import "./assets/css/index.css";
 import Home from "./assets/pages/Home.tsx";
-import About from "./assets/pages/About.tsx";
 import Navigation from "./assets/components/Navigation.tsx";
 import {ThemeProvider} from "./assets/providers/ThemeProvider.tsx";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider, ToastProvider} from "@heroui/react";
 
 
 ReactDOM.createRoot($("#root")[0]!).render(
@@ -24,15 +23,27 @@ ReactDOM.createRoot($("#root")[0]!).render(
 export function MainContentRenderer()
 {
     const navigate = useNavigate();
+    $(window).on("contextmenu", e => e.preventDefault());
     return (
         <HeroUIProvider navigate={navigate}>
-            <Navigation/>
-            <Routes>
-                <Route>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/about" element={<About/>}/>
-                </Route>
-            </Routes>
+            <ToastProvider
+                placement={"bottom-center"}
+                toastProps={{
+                    shouldShowTimeoutProgress: true,
+                    timeout: 3000,
+                    variant: "flat"
+                }}
+            />
+            <main className={"flex flex-col p-0 m-0"}>
+                <Navigation/>
+                <div className={"flex flex-col w-full max-h-[calc(100vh-2.5rem)] h-screen overflow-y-hidden px-4 py-0 m-0"} data-tauri-drag-region="">
+                    <Routes>
+                        <Route>
+                            <Route path="/" element={<Home/>}/>
+                        </Route>
+                    </Routes>
+                </div>
+            </main>
         </HeroUIProvider>
     );
 }
